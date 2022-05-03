@@ -2,39 +2,42 @@
 
 const { findTwoBeers } = require('./services/beers')
 
-module.exports.findTwoBeers = async (event, context, callback) => {
+module.exports.findTwoBeers = async (event) => {
   const body = JSON.parse(event.body);
 
   try {
     if (body.beers instanceof Array && !isNaN(body.target)) {
       const index = findTwoBeers(body.beers, body.target);
 
-      callback(null, {
+      return {
         statusCode: 200,
         body: JSON.stringify(
-          {
-            index
-          })
-      })
+          { index },
+          null,
+          2
+        )
+      }
 
     } else {
-      callback(null, {
+      return {
         statusCode: 400,
         body: JSON.stringify(
-          {
-            error: `Invalid inputs.`
-          })
-      })
+          { error: `Invalid inputs.` },
+          null,
+          2
+        )
+      }
     }
 
   } catch (error) {
     console.log(error)
-    callback(null, {
+    return {
       statusCode: 400,
       body: JSON.stringify(
-        {
-          error: error.message
-        })
-    })
+        { error: error.message },
+        null,
+        2
+      )
+    }
   }
 };
