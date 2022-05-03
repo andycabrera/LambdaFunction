@@ -11,6 +11,8 @@ module.exports.findTwoBeers = async (event) => {
 
       return {
         statusCode: 200,
+        headers: {
+          "content-type":"application/json; charset=utf-8"},
         body: JSON.stringify(
           { index },
           null,
@@ -21,6 +23,8 @@ module.exports.findTwoBeers = async (event) => {
     } else {
       return {
         statusCode: 400,
+        headers: {
+          "content-type":"application/json; charset=utf-8"},
         body: JSON.stringify(
           { error: `Invalid inputs.` },
           null,
@@ -33,6 +37,8 @@ module.exports.findTwoBeers = async (event) => {
     console.log(error)
     return {
       statusCode: 400,
+      headers: {
+        "content-type":"application/json; charset=utf-8"},
       body: JSON.stringify(
         { error: error.message },
         null,
