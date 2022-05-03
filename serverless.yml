@@ -1,0 +1,14 @@
+service: lambdaserverless
+frameworkVersion: '3'
+provider:
+  name: aws
+  runtime: nodejs12.x
+functions:
+  findTwoBeers:
+    handler: handler.findTwoBeers
+    events:
+     - httpApi:
+         path: /findTwoBeers
+         method: post
+plugins:
+  - serverless-offline
